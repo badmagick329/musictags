@@ -25,14 +25,6 @@ class SpotifyClient:
         tracks = [Track(item) for item in results["tracks"]["items"]]
         return tracks
 
-    @staticmethod
-    def __filter_tracks(tracks: list[Track], artist: str) -> list[Track]:
-        return [
-            t
-            for t in tracks
-            if t.artists[0].name.lower() == artist.strip().lower()
-        ]
-
 
 if __name__ == "__main__":
     import os
@@ -44,8 +36,7 @@ if __name__ == "__main__":
     CLIENT_SECRET = os.getenv("CLIENT_SECRET")
     client = SpotifyClient(CLIENT_ID, CLIENT_SECRET)
     artist = input("Artist: ")
-    album = input("Album: ")
     track = input("Track: ")
-    tracks = client.search_tracks(artist, album, track, 15)
+    tracks = client.search_tracks(artist, track)
     for t in tracks:
         print(t)

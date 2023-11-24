@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from cli import get_album_name, get_artist_name, get_folder_name, get_track
+from cli import get_artist_name, get_folder_name, get_track
 from file_metadata import FlacMetadata
 from spotify_client import SpotifyClient
 from utils import clean_name
@@ -21,7 +21,6 @@ def main():
         print(f"No flac files found at {folder}")
         return
     artist = get_artist_name()
-    # album = get_album_name()
     client = SpotifyClient(CLIENT_ID, CLIENT_SECRET)
     for file in files:
         track = get_track(client, artist, file)
