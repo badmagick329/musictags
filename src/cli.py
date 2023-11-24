@@ -55,7 +55,7 @@ def get_artist_name() -> str:
     name = ""
     while name == "":
         name = input(
-            "Enter artist name (Case insensitive exact match): "
+            "Enter artist name: "
         ).strip()
     return name
 
@@ -67,8 +67,8 @@ def get_album_name() -> str:
     return name
 
 
-def get_folder_name() -> Optional[Path]:
-    folder_path = Path(input("Folder path: ").strip())
+def get_folder_name(folder:str) -> Optional[Path]:
+    folder_path = Path(folder)
     if not folder_path.exists():
         print("Folder does not exist")
         return
