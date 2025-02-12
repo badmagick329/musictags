@@ -45,7 +45,7 @@ def main():
         track = get_track(client, artist, file)
         if track is None:
             continue
-        mdata = FlacMetadata(file)
+        mdata = FlacMetadata(str(file))
         mdata.set_tags(track.as_tags())
         if args.skip_renaming:
             continue

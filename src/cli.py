@@ -28,14 +28,13 @@ class TrackNameResult:
     track_name: Optional[str]
 
 
-def get_track(
-    client: SpotifyClient, artist: str, file: Path
-) -> Optional[Track]:
+def get_track(client: SpotifyClient, artist: str, file: Path) -> Optional[Track]:
     while True:
         selected = _get_track_name(file)
         if selected.result_type == SelectionResultType.SKIP:
             return None
         name = selected.track_name
+        assert name, "Track name should not be None"
         print(f"Searching for track: {name}")
         tracks = client.search_tracks(artist, name)
         if len(tracks) == 0:
@@ -54,9 +53,7 @@ def get_track(
 def get_artist_name() -> str:
     name = ""
     while name == "":
-        name = input(
-            "Enter artist name: "
-        ).strip()
+        name = input("Enter artist name: ").strip()
     return name
 
 
@@ -67,7 +64,7 @@ def get_album_name() -> str:
     return name
 
 
-def get_folder_name(folder:str) -> Optional[Path]:
+def get_folder_name(folder: str) -> Optional[Path]:
     folder_path = Path(folder)
     if not folder_path.exists():
         print("Folder does not exist")
@@ -91,7 +88,7 @@ def _get_track_name(file: Path) -> TrackNameResult:
     name = input(input_str).strip()
     if name == "u":
         name = suggestion
-    if name == "s":
+    elif name == "s":
         return TrackNameResult(SelectionResultType.SKIP, None)
     return TrackNameResult(SelectionResultType.SELECTED, name)
 
@@ -100,10 +97,9 @@ def _select_track(tracks) -> TrackSelectionResult:
     while True:
         print()
         for i, track in enumerate(tracks):
-            print(f"{i+1}: {track}")
+            print(f"{i + 1}: {track}")
         input_str = (
-            "\nSelect track by index, "
-            "search with a different name (n) or skip (s): "
+            "\nSelect track by index, search with a different name (n) or skip (s): "
         )
         choice = input(input_str).strip().lower()
         if choice == "n":
@@ -118,9 +114,7 @@ def _select_track(tracks) -> TrackSelectionResult:
         if choice < 1 or choice > len(tracks):
             print("Index out of range")
             continue
-        return TrackSelectionResult(
-            SelectionResultType.SELECTED, tracks[choice - 1]
-        )
+        return TrackSelectionResult(SelectionResultType.SELECTED, tracks[choice - 1])
 
 
 def _process_no_tracks(artist: str, name) -> SelectionResultType:

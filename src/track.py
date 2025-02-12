@@ -106,11 +106,16 @@ class Track:
         self.uri = data.get("uri", "")
 
     def as_tags(self) -> dict[str, str]:
+        date_value = (
+            self.album.release_date.strftime("%Y-%m-%d")
+            if self.album.release_date
+            else ""
+        )
         return {
             "ALBUM": self.album.name,
             "ARTIST": self.artists[0].name,
             "ARTISTS": self.artists[0].name,
-            "DATE": str(self.album.release_date),
+            "DATE": date_value,
             "TITLE": self.name,
             "TRACKNUMBER": str(self.data_dict.get("track_number", 0)),
             "TRACKTOTAL": str(self.album.total_tracks),

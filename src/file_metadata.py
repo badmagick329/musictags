@@ -11,6 +11,8 @@ class FlacMetadata:
 
     def set_tags(self, tags: dict[str, str]):
         for key, value in tags.items():
+            if not value:
+                continue
             self.audio[key] = value
         self.audio.save()
 
