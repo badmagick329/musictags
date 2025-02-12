@@ -4,7 +4,7 @@ import os
 
 from dotenv import load_dotenv
 
-from cli import get_artist_name, get_folder_name, get_track
+from cli import Cli
 from file_metadata import FlacMetadata
 from spotify_client import SpotifyClient
 from utils import clean_name
@@ -32,17 +32,19 @@ def parse_args() -> argparse.Namespace:
 
 def main():
     args = parse_args()
-    folder = get_folder_name(args.album_folder)
+    cli = Cli()
+    folder = cli.get_folder_name(args.album_folder)
     if folder is None:
         return
     files = [f for f in folder.iterdir() if f.is_file() and f.suffix == ".flac"]
     if len(files) == 0:
         print(f"No flac files found at {folder}")
         return
-    artist = args.artist if args.artist else get_artist_name()
+
+    artist = args.artist if args.artist else cli.get_artist_name()
     client = SpotifyClient(CLIENT_ID, CLIENT_SECRET)
     for file in files:
-        track = get_track(client, artist, file)
+        track = cli.get_track(client, artist, file)
         if track is None:
             continue
         mdata = FlacMetadata(str(file))

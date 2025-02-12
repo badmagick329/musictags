@@ -6,3 +6,4 @@ vnv
 *.json
 notes
 venv
+.idea

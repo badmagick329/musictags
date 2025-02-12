@@ -2,6 +2,8 @@ import datetime
 from datetime import datetime as dt
 from typing import Optional
 
+from ansii_colors import AnsiiColors
+
 
 class Artist:
     data_dict: dict
@@ -66,6 +68,11 @@ class Album:
     def __str__(self) -> str:
         return f'"{self.name}" ("{self.release_date}") [{self.album_type}]'
 
+    def colored_string(self) -> str:
+        name = AnsiiColors.colorize("GREEN", self.name)
+        date = AnsiiColors.colorize("RED", f'"{self.release_date}"')
+        return f"{name} ({date}) [{self.album_type}]"
+
     def __repr__(self) -> str:
         return (
             f"Album(name={self.name}, album_type={self.album_type}, "
@@ -123,6 +130,11 @@ class Track:
 
     def __str__(self) -> str:
         return f"{self.artists[0]} - {self.name} - {self.album} #{self.track_number}"
+
+    def colored_string(self) -> str:
+        artist = AnsiiColors.colorize("YELLOW", str(self.artists[0]))
+        name = AnsiiColors.colorize("BLUE", self.name)
+        return f"{artist} - {name} - {self.album.colored_string()} #{self.track_number}"
 
     def __repr__(self) -> str:
         return (
