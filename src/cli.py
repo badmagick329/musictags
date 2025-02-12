@@ -106,9 +106,9 @@ class Cli:
         return sorted(
             tracks,
             key=lambda t: (
-                1
+                -1
                 if t.album.release_date and t.album.release_date.isoformat() == date
-                else -1
+                else 1
             ),
         )
 
