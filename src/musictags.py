@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("album_folder", help="Folder to search for flac files")
     parser.add_argument("-a", "--artist", help="Artist name")
+    parser.add_argument("-y", "--year", help="Album release year")
     parser.add_argument(
         "-sr",
         "--skip-renaming",
@@ -42,9 +43,10 @@ def main():
         return
 
     artist = args.artist if args.artist else cli.get_artist_name()
+    year = args.year if args.year else cli.get_year()
     client = SpotifyClient(CLIENT_ID, CLIENT_SECRET)
     for file in files:
-        track = cli.get_track(client, artist, file)
+        track = cli.get_track(client=client, file=file, artist=artist, year=year)
         if track is None:
             continue
         mdata = FlacMetadata(str(file))

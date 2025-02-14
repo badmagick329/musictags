@@ -32,7 +32,7 @@ class Cli:
     date_from_previous_choice: Optional[str] = None
 
     def get_track(
-        self, client: SpotifyClient, artist: str, file: Path
+        self, client: SpotifyClient, file: Path, artist: str, year: Optional[int] = None
     ) -> Optional[Track]:
         while True:
             selected = Cli._get_track_name(file)
@@ -42,7 +42,7 @@ class Cli:
             assert name, "Track name should not be None"
 
             print(f"Searching for track: {name}")
-            tracks = client.search_tracks(artist, name)
+            tracks = client.search_tracks(artist, name, year)
             if len(tracks) == 0:
                 result_type = Cli._process_no_tracks(artist, name)
                 if result_type == SelectionResultType.SKIP:
@@ -89,6 +89,17 @@ class Cli:
         while name == "":
             name = input("Enter artist name: ").strip()
         return name
+
+    @staticmethod
+    def get_year() -> Optional[int]:
+        year = input("Enter release year (or leave blank): ").strip()
+        if not year:
+            return None
+        try:
+            return int(year)
+        except ValueError:
+            print(f"Invalid year: {year}")
+            return None
 
     @staticmethod
     def get_folder_name(folder: str) -> Optional[Path]:

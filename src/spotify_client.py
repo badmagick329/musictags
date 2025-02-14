@@ -3,6 +3,7 @@ from urllib.parse import quote
 import requests
 import spotipy
 from spotipy import SpotifyClientCredentials
+from typing import Optional
 
 from track import Track
 
@@ -16,10 +17,14 @@ class SpotifyClient:
         )
         self.bearer = self.client._auth_headers()["Authorization"]
 
-    def search_tracks(self, artist: str, track: str) -> list[Track]:
+    def search_tracks(
+        self, artist: str, track: str, year: Optional[int] = None
+    ) -> list[Track]:
         headers = {"Authorization": self.bearer}
-        query = quote(f"artist:{artist} track:{track}")
-        url = f"https://api.spotify.com/v1/search?q={query}&type=track"
+        query = f"year:{year} " if year else ""
+        query += f"artist:{artist} track:{track}"
+        quoted = quote(query)
+        url = f"https://api.spotify.com/v1/search?q={quoted}&type=track"
         response = requests.get(url, headers=headers)
         results = response.json()
         tracks = [Track(item) for item in results["tracks"]["items"]]
@@ -35,8 +40,8 @@ if __name__ == "__main__":
     CLIENT_ID = os.getenv("CLIENT_ID")
     CLIENT_SECRET = os.getenv("CLIENT_SECRET")
     client = SpotifyClient(CLIENT_ID, CLIENT_SECRET)
-    artist = input("Artist: ")
-    track = input("Track: ")
-    tracks = client.search_tracks(artist, track)
-    for t in tracks:
+    artist_ = input("Artist: ")
+    track_ = input("Track: ")
+    tracks_ = client.search_tracks(artist_, track_)
+    for t in tracks_:
         print(t)
