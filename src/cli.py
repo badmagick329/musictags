@@ -77,7 +77,7 @@ class Cli:
             f"Enter track name, use suggestion (u), or skip (s): "
         )
         name = input(input_str).strip()
-        if name == "u":
+        if name == "u" or name.strip() == "":
             name = suggestion
         elif name == "s":
             return TrackNameResult(SelectionResultType.SKIP, None)
