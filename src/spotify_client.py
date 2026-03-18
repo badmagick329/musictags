@@ -26,7 +26,18 @@ class SpotifyClient:
         quoted = quote(query)
         url = f"https://api.spotify.com/v1/search?q={quoted}&type=track"
         response = requests.get(url, headers=headers)
-        results = response.json()
+        if not response.ok:
+            message = response.text.strip() or "No response body"
+            raise RuntimeError(
+                f"Spotify search failed ({response.status_code}): {message}"
+            )
+        try:
+            results = response.json()
+        except requests.exceptions.JSONDecodeError as exc:
+            message = response.text.strip() or "No response body"
+            raise RuntimeError(
+                f"Spotify returned an invalid response ({response.status_code}): {message}"
+            ) from exc
         tracks = [Track(item) for item in results["tracks"]["items"]]
         return tracks
 
