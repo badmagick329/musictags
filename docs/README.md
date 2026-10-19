@@ -19,6 +19,8 @@ musictags is the owner's personal command-line tool that fixes the tags on FLAC 
 | --- | --- |
 | [context/glossary.md](context/glossary.md) | The project's ubiquitous language. Update when a concept is added or renamed. |
 | YouTrack project `MTG` ("musictags") | Issues, bugs and feature requests, read and updated through the `youtrack` MCP tools; open work is `project: MTG #Unresolved`. |
+| [decisions/2026-10-19-copy-spotify-naming.md](decisions/2026-10-19-copy-spotify-naming.md) | Why every tag copies Spotify's naming (scrobbles must merge with Spotify plays). Supersede when the scrobbling goal changes. |
+| [plans/active/album-first-tagging.md](plans/active/album-first-tagging.md) | Album-first flow, preview, tidy and the vertical-slice restructure. Update as phases land; retire per *Where new documents go* when done. |
 | [../README.md](../README.md) | Public setup and usage, including the CLI's arguments. Update when the arguments, setup or requirements change. |
 
 ## Language
