@@ -6,7 +6,8 @@ The project's ubiquitous language, one row per concept; the index's *Language* s
 | --- | --- | --- | --- |
 | Album | A Spotify release an album folder is tagged from. Its artists are kept apart from each track's, because the two lists can differ in order. | release (except in *release date* and *release hints*) | `Album`, `Album.artists`, `SpotifyCatalog.search_albums`, `SpotifyCatalog.album_tracks` |
 | Album link | A Spotify album URL (localised `intl-xx/` ones included), `spotify:album:` URI or bare ID, pasted by the user or given to `--album`. | | `parse_album_id` |
-| Album match | Pairing every file in the album folder with a track of one chosen Spotify album, by track number, title similarity and length; each pair is sure or unsure. Planned. | auto-match | |
+| Album match | Pairing each file in the album folder with at most one track of the chosen album, best pair first, scored by title similarity (shop and Spotify qualifier styles normalised), length, and track and disc number. A track number only supports a pair. Each file is sure (near-identical title and length within 2 s), unsure or unmatched. | auto-match | `match_album`, `FileMatch`, `MatchConfidence`, `normalise_title` |
+| Album ranking | Ordering album search results by artist, album name, track count and year against the release hints. | | `rank_albums`, `RankedAlbum` |
 | Album folder | The folder given on the command line; only `.flac` files directly inside it are processed. | directory | `album_folder`, `folder` |
 | Artist | The performer searched for, entered once per run and used for every file. The tags take the selected track's first Spotify artist instead. | | `artist`; `Artist` is a Spotify artist, `Track.main_artist` the first |
 | File | One FLAC file in the album folder, tagged and renamed in place. | track | `file`, `FlacTagWriter` |
