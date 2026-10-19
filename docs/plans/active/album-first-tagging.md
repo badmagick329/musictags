@@ -1,7 +1,7 @@
 # Album-first tagging
 
 - Date: 2026-10-19
-- Status: Proposed; the restructure in *Layout* awaits the owner's approval.
+- Status: In progress. *Layout* is done; the target flow and tidy are not started.
 
 ## Problem
 
@@ -23,20 +23,7 @@ For releases not on Spotify: keep the source tags but normalise them: dates to `
 
 ## Layout
 
-The project now crosses the threshold for vertical slices (several features plus Spotify, filesystem and CLI I/O). Proposed, pending approval:
-
-```text
-src/musictags/
-  domain/            # Track, Album, Artist, tag mapping, match scoring: pure, no I/O
-  features/
-    tag_album/       # album-first flow use case
-    tidy_tags/       # source-tag normalisation use case
-  infrastructure/    # Spotify client, FLAC read/write, file renaming
-  presentation/      # CLI prompts and the preview table
-tests/
-```
-
-Spotify calls move to spotipy's own methods (`search`, `album_tracks`), which refresh the token, replacing the hand-built `requests` call and its one-hour limit.
+Done 2026-10-19: the code is in vertical slices (see the index's working rules), the per-file flow is the `tag_tracks` slice, and Spotify search goes through spotipy, which refreshes its token. Remaining: the album-first flow becomes a `tag_album` slice reusing `tag_tracks` for unmatched files, tidy becomes `tidy_tags`, and match scoring goes in `domain/`. Album lookups use spotipy's `search(type="album")` and `album_tracks`.
 
 ## Acceptance criteria
 

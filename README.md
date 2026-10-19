@@ -10,8 +10,8 @@ Fixes tags on flac audio files for scrobbling on last.fm. Uses track information
 
 You will need your Client ID and Client Secret from spotify. Make sure you add it in a .env file. [Sample file](.env.sample)
 
-1. pip install -r requirements.txt
-2. py src/musictags.py
+1. pip install -e .
+2. py -m musictags <album folder>
 
 ```
 positional arguments:

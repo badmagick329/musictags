@@ -7,3 +7,4 @@ vnv
 venv
 .venv
 .idea
+*.egg-info

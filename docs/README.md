@@ -8,10 +8,10 @@ musictags is the owner's personal command-line tool that fixes the tags on FLAC 
 
 ## Working rules for agents
 
-- Run it from the repository root as `python src/musictags.py <album folder>`. Modules import their siblings by bare name, so `src/` must be the script's directory.
-- Spotify credentials come from `CLIENT_ID` and `CLIENT_SECRET` in `.env` (see `.env.sample`).
-- There is no test suite. Tagging and renaming change files in place, so try changes on a copy of an album folder.
-- `SpotifyClient` reads the bearer token once, at construction, from spotipy's private `_auth_headers()`, then calls the search endpoint with `requests`. The token is never refreshed, so a run lasting over an hour fails its searches.
+- Use the `.venv` virtual environment. After `pip install -e .`, run `python -m musictags <album folder>`; run the tests with `python -m pytest`.
+- The code is split into vertical slices: `src/musictags/features/<slice>/` holds each feature's use case (with its ports as `Protocol`s) and its CLI; `domain/` is pure, with no I/O and no Spotify JSON; `infrastructure/` implements the ports; `__main__.py` wires them together. A new feature gets its own slice.
+- Spotify credentials come from `CLIENT_ID` and `CLIENT_SECRET` in `.env` (see `.env.sample`); `load_dotenv` finds it by walking up from the package, so the install must stay editable.
+- Tests use fakes for every port and never reach Spotify or real audio. Tagging and renaming change files in place, so try live runs on a copy of an album folder.
 
 ## Where to look
 
