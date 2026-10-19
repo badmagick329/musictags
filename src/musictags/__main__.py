@@ -62,6 +62,17 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
 
 
 def main(argv: Optional[Sequence[str]] = None) -> None:
+    try:
+        _main(argv)
+    except (EOFError, KeyboardInterrupt):
+        # End of input (Ctrl+Z, Ctrl+D) or Ctrl+C at any prompt means quit.
+        # The album-first flow writes nothing before `a`; the per-file flow
+        # keeps the files it has already tagged.
+        print()
+        sys.exit(1)
+
+
+def _main(argv: Optional[Sequence[str]]) -> None:
     args = parse_args(argv)
     album_id = None
     if args.album is not None:

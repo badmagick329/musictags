@@ -293,6 +293,21 @@ def test_an_invalid_album_link_exits_with_its_message(wired, capsys):
     assert calls == []
 
 
+@pytest.mark.parametrize("error", [EOFError, KeyboardInterrupt])
+def test_end_of_input_or_ctrl_c_quits_without_a_traceback(wired, monkeypatch, error):
+    _, folder = wired
+
+    def stop(self, *args, **kwargs):
+        raise error
+
+    monkeypatch.setattr(entry.TagAlbum, "run", stop)
+
+    with pytest.raises(SystemExit) as exit_info:
+        entry.main([str(folder)])
+
+    assert exit_info.value.code == 1
+
+
 def test_a_runtime_error_prints_its_message_not_a_traceback(wired, monkeypatch, capsys):
     _, folder = wired
 
