@@ -1,56 +1,61 @@
 # musictags
 
-## Description
-
-Fixes tags on flac audio files for scrobbling on last.fm. Uses track information from spotify
+Rewrites the tags on FLAC files with Spotify's names, so Last.fm scrobbles from local plays land on the same tracks, albums and artists as your Spotify plays.
 
 ![musictags4](https://github.com/badmagick329/musictags/assets/63713349/a975d6b2-bb6f-47e9-a807-cd74e26f4b5f)
 
-## Usage
-
-### Setup
-
-You need a Client ID and Client Secret from a Spotify app. Copy [.env.sample](.env.sample) to `.env` and fill in `CLIENT_ID` and `CLIENT_SECRET`.
-
-Install into a virtual environment:
+## How it works
 
 ```
-python -m venv .venv
-.venv\Scripts\activate
-pip install -e .
+uv run musictags "path\to\250101 Album Name"
 ```
 
-### Tagging an album
+1. It reads the tags already on the files and the folder name (`YYMMDD Album name`) to work out the artist, album and year. It asks only for what it can't find.
+2. It searches Spotify and lists matching albums. Type a number to pick one, paste a Spotify album link, `n` to change the search, or `q` to quit.
+3. It pairs every file with a track on that album and shows a preview. Nothing has been written yet.
+4. Press `a` and it writes the tags, removes shop leftovers and renames the files to `NN Track name.flac`.
+
+The preview looks like this:
 
 ```
-python -m musictags <album folder>
+Album: Artist - Album Name (2025-01-01) [album] 10 tracks
+
+Album tags:
+  ALBUMARTIST: Artist & Guest → Artist
+  DATE: 2025.01.01 → 2025-01-01
+
+Files:
+  1 ✓    01. Song One.flac → 01 Song One.flac
+         #1 Song One
+  2 ?    02. Song Two (Remix).flac → 02 Song Two - Remix.flac
+         #2 Song Two - Remix
+  ...
+
+Stray tags to remove: YEAR ×10, TRCK ×10, COMMENT ×10, WWW ×10
 ```
 
-musictags reads the existing tags to work out the artist, album and year (falling back to a folder name like `250314 MIDNIGHT SIGNAL`), searches Spotify for the album and lists the best matches. If the files carry no artist or album, it asks for them. At the album list you can:
+`✓` is a confident match, `?` is a guess worth checking, and `skip` rows are left alone. At the preview prompt:
 
-- type a number to pick that album
-- paste a Spotify album link, URI or ID
-- type `n` to edit the artist and album and search again
-- type `q` to quit
+| Key | What it does |
+| --- | --- |
+| `a` | Apply. Refused while two files would get the same name. |
+| `e N` | Change row N: an album track number, `s` to skip the file, or `/` to search Spotify for that file alone. |
+| `p` | Back to the album list. |
+| `q` | Quit without writing anything. |
 
-It then matches each file to a track on the album and shows a preview: the album tags that will change, each file with its matched track and new name, and the stray tags it will remove (Genie leftovers such as `COMMENT`, `WWW`, `TRCK`, `ALBUMTITLE`, `YEAR`, the placeholder `COPYRIGHT`, and blank tags). `✓` marks a confident match, `?` a guess worth checking. Nothing is written until you apply.
+## What gets written
 
-- `a` writes the tags and renames the files to `NN Track name.flac`
-- `e N` edits row N: type the album track number to use, `s` to skip the file, `/` to search Spotify for that one file, or Enter to keep the row
-- `p` goes back to the album list
-- `q` quits without writing
+| Tag | Value |
+| --- | --- |
+| `TITLE`, `ALBUM` | Spotify's names, exactly |
+| `ARTIST`, `ARTISTS` | The track's first Spotify artist, since Spotify scrobbles send only that one |
+| `ALBUMARTIST` | The album's first Spotify artist |
+| `DATE` | Release date as `YYYY-MM-DD` |
+| `TRACKNUMBER`, `TRACKTOTAL` | From the Spotify album |
 
-If two files would end up with the same name, `a` refuses until you fix the rows. Use `--dry-run` to print the preview and exit, or `--album LINK` to skip the search when you already know the album.
+It also removes `COMMENT`, `WWW`, `TRCK`, `ALBUMTITLE`, `YEAR`, empty tags and Genie's placeholder `COPYRIGHT`. Other tags, such as `GENRE`, `LABEL` and lyrics, stay.
 
-### Tagging file by file
-
-```
-python -m musictags --per-track -a "NOVA" <album folder>
-```
-
-This searches Spotify for each file in turn. For every file it suggests a track name from the filename; press Enter or `u` to search with it, type a different name, or `s` to skip. Pick a result by number, `n` to search with another name, or `s` to skip. Each file is tagged and renamed as soon as you pick. Without `-a` or `-y` it asks for the artist and release year first. `--album` and `--dry-run` don't work in this mode.
-
-### Options
+## Options
 
 ```
 usage: musictags [-h] [-a ARTIST] [-y YEAR] [-sr] [--per-track] [--album LINK]
@@ -75,3 +80,13 @@ options:
                         album search
   --dry-run             Print the preview and exit without writing anything
 ```
+
+`--per-track` is the older flow for albums that don't match well: you search Spotify one file at a time, and each file is tagged as soon as you pick its track.
+
+## Setup
+
+1. Create an app in the [Spotify developer dashboard](https://developer.spotify.com/dashboard) to get a Client ID and Client Secret.
+2. Copy [.env.sample](.env.sample) to `.env` and fill in `CLIENT_ID` and `CLIENT_SECRET`.
+3. Run `uv run musictags --help`. uv installs everything on the first run.
+
+Files are changed in place, so try `--dry-run` or a copy of the folder first.
