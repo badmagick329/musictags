@@ -4,6 +4,7 @@ from mutagen import MutagenError
 from mutagen.flac import FLAC
 
 from musictags.domain.source import SourceFile, SourceTags
+from musictags.domain.tags import stray_tags
 
 
 def list_flac_files(folder: Path) -> list[Path]:
@@ -33,7 +34,16 @@ def _source_tags(audio: FLAC) -> SourceTags:
 
 class FlacTagWriter:
     def write_tags(self, file: Path, tags: dict[str, str]) -> None:
+        """Set `tags` and remove the file's stray tags in a single save.
+
+        Stray tags are judged against the file's tags as they are now, so the
+        file is read here rather than trusting an earlier `SourceFile`.
+        """
         audio = FLAC(str(file))
+        for key in stray_tags(_source_tags(audio), tags):
+            # mutagen matches Vorbis keys case-insensitively, so this drops
+            # "Comment" and "COMMENT" alike.
+            del audio[key]
         for key, value in tags.items():
             # Empty means Spotify had nothing; keep whatever the file already has.
             if not value:

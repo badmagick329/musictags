@@ -21,7 +21,9 @@ class TrackSearch(Protocol):
 
 
 class TagWriter(Protocol):
-    def write_tags(self, file: Path, tags: dict[str, str]) -> None: ...
+    def write_tags(self, file: Path, tags: dict[str, str]) -> None:
+        """Set `tags` (an empty value leaves the tag as is) and remove stray tags."""
+        ...
 
 
 class Renamer(Protocol):

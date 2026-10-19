@@ -3,6 +3,7 @@ from mutagen.flac import FLAC
 
 from musictags.infrastructure.flac import (
     FileRenamer,
+    FlacTagWriter,
     list_flac_files,
     read_source_files,
 )
@@ -88,6 +89,43 @@ def test_lists_flac_files_sorted_by_name(tmp_path):
     (tmp_path / "disc 2.flac" / "01 nested.flac").write_bytes(b"")
 
     assert [f.name for f in list_flac_files(tmp_path)] == ["02 a.flac", "10 b.flac"]
+
+
+def test_write_tags_sets_new_tags_and_removes_stray_tags(tmp_path):
+    file = tmp_path / "01 Song.flac"
+    write_flac(
+        file,
+        seconds=3,
+        tags={
+            "TITLE": ["Old"],
+            "AlbumArtist": ["NOVA / ORBIT"],
+            "Comment": ["지니뮤직"],
+            "COMMENT": ["again"],
+            "www": ["https://www.genie.co.kr"],
+            "TRCK": ["1/2"],
+            "YEAR": ["2025"],
+            "Lyrics": [""],
+            "COPYRIGHT": ["해당곡의 저작권자"],
+            "GENRE": ["Dance"],
+            "LABEL": ["CJ ENM"],
+            "DISCNUMBER": ["1"],
+            "DATE": ["2025.03.14"],
+        },
+    )
+
+    FlacTagWriter().write_tags(
+        file, {"TITLE": "New", "ALBUMARTIST": "NOVA", "DATE": ""}
+    )
+
+    tags = FLAC(str(file)).tags
+    assert sorted(key.upper() for key in tags.keys()) == [
+        "ALBUMARTIST", "DATE", "DISCNUMBER", "GENRE", "LABEL", "TITLE",
+    ]
+    assert tags["TITLE"] == ["New"]
+    assert tags["ALBUMARTIST"] == ["NOVA"]
+    # An empty new value leaves the existing tag.
+    assert tags["DATE"] == ["2025.03.14"]
+    assert tags["GENRE"] == ["Dance"]
 
 
 def test_rename_keeps_file_in_its_folder(tmp_path):

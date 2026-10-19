@@ -79,6 +79,7 @@ def test_selected_track_is_tagged_and_renamed():
     assert ui.searched == ["Who Me"]
     assert writer.written == [(Path("music/03 - who me.flac"), {
         "ALBUM": "Album",
+        "ALBUMARTIST": "Artist",
         "ARTIST": "Artist",
         "ARTISTS": "Artist",
         "DATE": "2020-08-28",
