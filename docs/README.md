@@ -9,7 +9,7 @@ musictags is the owner's personal command-line tool that fixes the tags on FLAC 
 ## Working rules for agents
 
 - Use the `.venv` virtual environment. After `pip install -e .`, run `python -m musictags <album folder>`; run the tests with `python -m pytest`.
-- The code is split into vertical slices: `src/musictags/features/<slice>/` holds each feature's use case (with its ports as `Protocol`s) and its CLI; `domain/` is pure, with no I/O and no Spotify JSON; `infrastructure/` implements the ports; `__main__.py` wires them together. A new feature gets its own slice.
+- The code is split into vertical slices: `src/musictags/features/<slice>/` holds each feature's use case (with its ports as `Protocol`s) and its CLI; `domain/` is pure, with no I/O and no Spotify JSON; `infrastructure/` implements the ports; `__main__.py` wires them together. `tag_album` is the default album-first flow; `tag_tracks` is `--per-track` and also serves the preview's per-file search. Ranking and match scoring live in `domain/`. A new feature gets its own slice (tidy will be `tidy_tags`, YouTrack `MTG-11`).
 - Spotify credentials come from `CLIENT_ID` and `CLIENT_SECRET` in `.env` (see `.env.sample`); `load_dotenv` finds it by walking up from the package, so the install must stay editable.
 - Tests use fakes for every port and never reach Spotify or real audio. Tagging and renaming change files in place, so try live runs on a copy of an album folder.
 
@@ -20,7 +20,7 @@ musictags is the owner's personal command-line tool that fixes the tags on FLAC 
 | [context/glossary.md](context/glossary.md) | The project's ubiquitous language. Update when a concept is added or renamed. |
 | YouTrack project `MTG` ("musictags") | Issues, bugs and feature requests, read and updated through the `youtrack` MCP tools; open work is `project: MTG #Unresolved`. |
 | [decisions/2026-10-19-copy-spotify-naming.md](decisions/2026-10-19-copy-spotify-naming.md) | Why every tag copies Spotify's naming (scrobbles must merge with Spotify plays). Supersede when the scrobbling goal changes. |
-| [plans/active/album-first-tagging.md](plans/active/album-first-tagging.md) | Album-first flow, preview, tidy and the vertical-slice restructure. Update as phases land; retire per *Where new documents go* when done. |
+| [decisions/2026-10-19-album-first-tagging.md](decisions/2026-10-19-album-first-tagging.md) | Why the default flow tags a whole album from one pick, writes nothing before the preview is applied, and how the album match weighs title over length. Supersede when the flow changes. |
 | [../README.md](../README.md) | Public setup and usage, including the CLI's arguments. Update when the arguments, setup or requirements change. |
 
 ## Language
