@@ -4,7 +4,7 @@ These documents live under `docs/` and are tracked in Git: commit document chang
 
 ## Project in one paragraph
 
-musictags is the owner's personal command-line tool that fixes the tags on FLAC files so Last.fm scrobbles them correctly, using track data from the Spotify Web API. The user passes an album folder, plus an optional artist and release year (prompted for when missing). For each file the tool offers a suggestion for the track name, searches Spotify, and lists the matching tracks; the user selects one, starts a new search or skips the file. The selected track's tags are written to the file, which is then renamed to `NN Track name.flac` unless `--skip-renaming` is given. It runs locally from a Python virtual environment and is not deployed.
+musictags is the owner's personal command-line tool that fixes the tags on FLAC files so Last.fm scrobbles them correctly, using track data from the Spotify Web API. The user passes an album folder. By default the tool reads the files' source tags, searches Spotify for the album, and after one album pick pairs every file with a track of that album and shows a preview; applying it writes the tags, removes stray tags and renames each file to `NN Track name.flac` unless `--skip-renaming` is given. `--per-track` runs the older per-file flow instead: for each file the user searches Spotify by track name and picks a track, and its tags are written straight away. It runs locally from a Python virtual environment and is not deployed.
 
 ## Working rules for agents
 

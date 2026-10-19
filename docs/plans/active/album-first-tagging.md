@@ -1,7 +1,7 @@
 # Album-first tagging
 
 - Date: 2026-10-19
-- Status: In progress. *Layout* is done. The target flow is tracked as YouTrack epic `MTG-4` and its subtasks; tidy is not started and is outside the epic.
+- Status: In progress. *Layout* is done. The target flow and CLI are built (YouTrack epic `MTG-4`, subtasks `MTG-5` to `MTG-9`); end-to-end verification and closeout (`MTG-10`) remain. Tidy is not started and is outside the epic.
 
 ## Problem
 

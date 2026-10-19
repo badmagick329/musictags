@@ -66,7 +66,7 @@ class TagTracks:
         self, files: list[Path], artist: str, year: Optional[int], rename: bool
     ) -> None:
         for file in files:
-            track = self._find_track(file, artist, year)
+            track = self.find_track(file, artist, year)
             if track is None:
                 continue
             self._tag_writer.write_tags(file, track_tags(track))
@@ -75,9 +75,14 @@ class TagTracks:
                     file, track_filename(track.track_number, track.name, file.suffix)
                 )
 
-    def _find_track(
+    def find_track(
         self, file: Path, artist: str, year: Optional[int]
     ) -> Optional[Track]:
+        """Ask for a track name, search and let the user pick; None if skipped.
+
+        Public because the album-first flow reuses it for a row the album
+        match got wrong (`/` when editing a preview row).
+        """
         suggestion = suggest_track_name(file.stem)
         while True:
             name = self._ui.ask_track_name(file.stem, suggestion)

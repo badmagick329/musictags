@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-from musictags.domain.models import Track
+from musictags.domain.models import Album, Track
 from musictags.domain.source import SourceTags
 
 # Shop residue that is stale or meaningless once musictags has tagged a file,
@@ -30,24 +30,35 @@ PLACEHOLDER_VALUES: Mapping[str, frozenset[str]] = {
 }
 
 
+def album_tags(album: Album) -> dict[str, str]:
+    """The tags every track of `album` shares; an empty value means "leave as is".
+
+    Kept apart from `track_tags` so the preview can show album-level changes
+    once instead of on every row, from the same values that get written.
+    """
+    date_value = album.release_date.strftime("%Y-%m-%d") if album.release_date else ""
+    # The mapper allows an album with no artists; then the shop's value stays.
+    album_artist = album.artists[0].name if album.artists else ""
+    return {
+        "ALBUM": album.name,
+        "ALBUMARTIST": album_artist,
+        "DATE": date_value,
+        "TRACKTOTAL": str(album.total_tracks),
+    }
+
+
 def track_tags(track: Track) -> dict[str, str]:
     """Vorbis comments for a FLAC file. An empty value means "leave as is"."""
-    date_value = (
-        track.album.release_date.strftime("%Y-%m-%d")
-        if track.album.release_date
-        else ""
-    )
-    # The mapper allows an album with no artists; then the shop's value stays.
-    album_artist = track.album.artists[0].name if track.album.artists else ""
+    shared = album_tags(track.album)
     return {
-        "ALBUM": track.album.name,
-        "ALBUMARTIST": album_artist,
+        "ALBUM": shared["ALBUM"],
+        "ALBUMARTIST": shared["ALBUMARTIST"],
         "ARTIST": track.main_artist.name,
         "ARTISTS": track.main_artist.name,
-        "DATE": date_value,
+        "DATE": shared["DATE"],
         "TITLE": track.name,
         "TRACKNUMBER": str(track.track_number),
-        "TRACKTOTAL": str(track.album.total_tracks),
+        "TRACKTOTAL": shared["TRACKTOTAL"],
     }
 
 
