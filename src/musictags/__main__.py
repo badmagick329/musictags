@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from musictags.features.tag_tracks import cli
 from musictags.features.tag_tracks.use_case import TagTracks
 from musictags.infrastructure.flac import FileRenamer, FlacTagWriter, list_flac_files
-from musictags.infrastructure.spotify import SpotifyTrackSearch
+from musictags.infrastructure.spotify import SpotifyCatalog
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -39,7 +39,7 @@ def main() -> None:
 
     artist = args.artist if args.artist else cli.get_artist_name()
     year = args.year if args.year is not None else cli.get_year()
-    search = SpotifyTrackSearch.from_credentials(
+    search = SpotifyCatalog.from_credentials(
         os.getenv("CLIENT_ID"), os.getenv("CLIENT_SECRET")
     )
     TagTracks(

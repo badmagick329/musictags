@@ -10,7 +10,13 @@ class Artist:
 
 @dataclass(frozen=True)
 class Album:
+    # Spotify's album ID, used to fetch the album's tracks.
+    id: str
     name: str
+    # Spotify's album artists, kept apart from each track's artists because
+    # the two lists can differ in order (album "NOVA, ORBIT" holds tracks by
+    # "ORBIT, NOVA").
+    artists: tuple[Artist, ...]
     album_type: str
     release_date: Optional[date]
     total_tracks: int
@@ -20,6 +26,9 @@ class Album:
 class Track:
     name: str
     track_number: int
+    disc_number: int
+    # Seconds, so it compares directly with a file's length from mutagen.
+    length: float
     # Never empty: the first artist names the file's ARTIST tag.
     artists: tuple[Artist, ...]
     album: Album

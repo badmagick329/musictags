@@ -5,7 +5,7 @@ import pytest
 import spotipy
 
 from musictags.domain.models import Album, Artist, Track
-from musictags.infrastructure.spotify import SpotifyTrackSearch, tracks_from_search
+from musictags.infrastructure.spotify import SpotifyCatalog, tracks_from_search
 
 # Trimmed from a real /v1/search?type=track response.
 ICE_CREAM = {
@@ -43,9 +43,13 @@ def test_maps_recorded_track():
         Track(
             name="Ice Cream (with Selena Gomez)",
             track_number=1,
+            disc_number=1,
+            length=175.813,
             artists=(Artist("BLACKPINK"), Artist("Selena Gomez")),
             album=Album(
+                id="2VBb4LRcRSACOfJWRUgVZl",
                 name="Ice Cream (with Selena Gomez)",
+                artists=(Artist("BLACKPINK"),),
                 album_type="single",
                 release_date=date(2020, 8, 28),
                 total_tracks=1,
@@ -62,13 +66,22 @@ def test_pads_coarse_release_dates():
 
 
 def test_missing_optional_fields_fall_back_to_defaults():
-    item = {"album": {}, "artists": [{}]}
+    item = {"album": {"id": "2VBb4LRcRSACOfJWRUgVZl", "artists": []}, "artists": [{}]}
     [track] = tracks_from_search(response(item))
     assert track == Track(
         name="",
         track_number=0,
+        disc_number=0,
+        length=0.0,
         artists=(Artist(""),),
-        album=Album(name="", album_type="", release_date=None, total_tracks=0),
+        album=Album(
+            id="2VBb4LRcRSACOfJWRUgVZl",
+            name="",
+            artists=(),
+            album_type="",
+            release_date=None,
+            total_tracks=0,
+        ),
     )
 
 
@@ -88,6 +101,9 @@ def test_empty_result_list():
         response({**ICE_CREAM, "artists": None}),
         response({k: v for k, v in ICE_CREAM.items() if k != "album"}),
         response({**ICE_CREAM, "track_number": "one"}),
+        response({**ICE_CREAM, "duration_ms": None}),
+        response({**ICE_CREAM, "album": {**ICE_CREAM["album"], "id": None}}),
+        response({**ICE_CREAM, "album": {**ICE_CREAM["album"], "artists": None}}),
     ],
 )
 def test_rejects_malformed_responses(bad):
@@ -110,7 +126,7 @@ class FakeSpotipy:
 
 def test_search_builds_query_with_year():
     client = FakeSpotipy()
-    tracks = SpotifyTrackSearch(client).search_tracks("BLACKPINK", "Ice Cream", 2020)
+    tracks = SpotifyCatalog(client).search_tracks("BLACKPINK", "Ice Cream", 2020)
 
     assert client.calls == [
         {"q": "year:2020 artist:BLACKPINK track:Ice Cream", "limit": 20, "type": "track"}
@@ -120,7 +136,7 @@ def test_search_builds_query_with_year():
 
 def test_search_omits_year_when_not_given():
     client = FakeSpotipy()
-    SpotifyTrackSearch(client).search_tracks("BLACKPINK", "Ice Cream", None)
+    SpotifyCatalog(client).search_tracks("BLACKPINK", "Ice Cream", None)
     assert client.calls[0]["q"] == "artist:BLACKPINK track:Ice Cream"
 
 
@@ -130,7 +146,7 @@ def test_search_error_names_status_and_spotify_message():
         -1,
         "https://api.spotify.com/v1/search?q=x&type=track:\n The access token expired",
     )
-    search = SpotifyTrackSearch(FakeSpotipy(error=error))
+    search = SpotifyCatalog(FakeSpotipy(error=error))
 
     with pytest.raises(RuntimeError) as info:
         search.search_tracks("a", "b", None)
@@ -141,4 +157,4 @@ def test_search_error_names_status_and_spotify_message():
 def test_search_error_without_message():
     error = spotipy.SpotifyException(502, -1, "https://api.spotify.com/v1/search:\n None")
     with pytest.raises(RuntimeError, match=r"^Spotify search failed \(502\): No response body$"):
-        SpotifyTrackSearch(FakeSpotipy(error=error)).search_tracks("a", "b", None)
+        SpotifyCatalog(FakeSpotipy(error=error)).search_tracks("a", "b", None)

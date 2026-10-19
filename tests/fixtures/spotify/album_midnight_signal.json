@@ -1,0 +1,353 @@
+{
+  "album_type": "album",
+  "total_tracks": 14,
+  "id": "2Kbn6hMdh6bD50FmLB0eHb",
+  "name": "MIDNIGHT SIGNAL",
+  "release_date": "2025-03-14",
+  "release_date_precision": "day",
+  "type": "album",
+  "uri": "spotify:album:2Kbn6hMdh6bD50FmLB0eHb",
+  "artists": [
+    {
+      "id": "hEllVTGDp15NBB8vp6KEhU",
+      "name": "NOVA",
+      "type": "artist",
+      "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+    }
+  ],
+  "tracks": {
+    "limit": 50,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 14,
+    "items": [
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 173413,
+        "explicit": false,
+        "id": "f79LyFqOLMApzDc22uscjC",
+        "name": "MIDNIGHT SIGNAL - English Ver.",
+        "preview_url": null,
+        "track_number": 1,
+        "type": "track",
+        "uri": "spotify:track:f79LyFqOLMApzDc22uscjC",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          },
+          {
+            "id": "7wiPuk2w579DtCzE6ELDm6",
+            "name": "ORBIT GEM",
+            "type": "artist",
+            "uri": "spotify:artist:7wiPuk2w579DtCzE6ELDm6"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 216053,
+        "explicit": false,
+        "id": "9dwFneoUhbrNTkOzB5iEeY",
+        "name": "K.L.M (Kinder Louder Mood) [feat. ORBIT GEM] - English Ver.",
+        "preview_url": null,
+        "track_number": 2,
+        "type": "track",
+        "uri": "spotify:track:9dwFneoUhbrNTkOzB5iEeY",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 175746,
+        "explicit": false,
+        "id": "KKBohIMcHP7t8BHHi7Gs8c",
+        "name": "ENGINE - English Ver.",
+        "preview_url": null,
+        "track_number": 3,
+        "type": "track",
+        "uri": "spotify:track:KKBohIMcHP7t8BHHi7Gs8c",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 214720,
+        "explicit": false,
+        "id": "cCzQoyh7cmuk0wPovrSGni",
+        "name": "Over The Wall (ORBIT) - English Ver.",
+        "preview_url": null,
+        "track_number": 4,
+        "type": "track",
+        "uri": "spotify:track:cCzQoyh7cmuk0wPovrSGni",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 173413,
+        "explicit": false,
+        "id": "MwaDbdWCXLq7SDi5G5EMyA",
+        "name": "MIDNIGHT SIGNAL - Chinese Ver.",
+        "preview_url": null,
+        "track_number": 5,
+        "type": "track",
+        "uri": "spotify:track:MwaDbdWCXLq7SDi5G5EMyA",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          },
+          {
+            "id": "7wiPuk2w579DtCzE6ELDm6",
+            "name": "ORBIT GEM",
+            "type": "artist",
+            "uri": "spotify:artist:7wiPuk2w579DtCzE6ELDm6"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 216053,
+        "explicit": false,
+        "id": "u7l8jBvW2XBctTqLmM8rEe",
+        "name": "K.L.M (Kinder Louder Mood) [feat. ORBIT GEM] - Chinese Ver.",
+        "preview_url": null,
+        "track_number": 6,
+        "type": "track",
+        "uri": "spotify:track:u7l8jBvW2XBctTqLmM8rEe",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 175760,
+        "explicit": false,
+        "id": "nwroohRiymwCzv6GoRkBsI",
+        "name": "ENGINE - Chinese Ver.",
+        "preview_url": null,
+        "track_number": 7,
+        "type": "track",
+        "uri": "spotify:track:nwroohRiymwCzv6GoRkBsI",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 214706,
+        "explicit": false,
+        "id": "TDzMQD2hlwMlqLbg6vsM0L",
+        "name": "Over The Wall (ORBIT) - Chinese Ver.",
+        "preview_url": null,
+        "track_number": 8,
+        "type": "track",
+        "uri": "spotify:track:TDzMQD2hlwMlqLbg6vsM0L",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 170653,
+        "explicit": false,
+        "id": "zLYTtKGZbzpvRPk5AOHzil",
+        "name": "FEVER (LEO & MIA) - English Edit",
+        "preview_url": null,
+        "track_number": 9,
+        "type": "track",
+        "uri": "spotify:track:zLYTtKGZbzpvRPk5AOHzil",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 170653,
+        "explicit": false,
+        "id": "RXWGH5HVyqJN9tQKZDosoT",
+        "name": "FEVER (LEO & MIA) - Spanish Edit",
+        "preview_url": null,
+        "track_number": 10,
+        "type": "track",
+        "uri": "spotify:track:RXWGH5HVyqJN9tQKZDosoT",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 255146,
+        "explicit": false,
+        "id": "Gu1g88YfvqbMX9qoQiVqkP",
+        "name": "ECHO - RIN & SOL & KAI",
+        "preview_url": null,
+        "track_number": 11,
+        "type": "track",
+        "uri": "spotify:track:Gu1g88YfvqbMX9qoQiVqkP",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          },
+          {
+            "id": "GtZsflprepxy28UEwHZDVx",
+            "name": "ORBIT RIN",
+            "type": "artist",
+            "uri": "spotify:artist:GtZsflprepxy28UEwHZDVx"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 184226,
+        "explicit": false,
+        "id": "AmTVxmDbxj0kRv0zOEcLAb",
+        "name": "Some Old Friend",
+        "preview_url": null,
+        "track_number": 12,
+        "type": "track",
+        "uri": "spotify:track:AmTVxmDbxj0kRv0zOEcLAb",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          },
+          {
+            "id": "oa15iT1oEATctJlTI5y9UC",
+            "name": "ORBIT KAI",
+            "type": "artist",
+            "uri": "spotify:artist:oa15iT1oEATctJlTI5y9UC"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 186693,
+        "explicit": false,
+        "id": "t77GfAnK6bzEvxHaFUNZyO",
+        "name": "Gray Goose",
+        "preview_url": null,
+        "track_number": 13,
+        "type": "track",
+        "uri": "spotify:track:t77GfAnK6bzEvxHaFUNZyO",
+        "is_local": false
+      },
+      {
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          },
+          {
+            "id": "Out6dkIRam1GPBHp5zaugr",
+            "name": "ORBIT SOL",
+            "type": "artist",
+            "uri": "spotify:artist:Out6dkIRam1GPBHp5zaugr"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 195946,
+        "explicit": false,
+        "id": "14VxqWuWyI18GQdLFS5j94",
+        "name": "Drift",
+        "preview_url": null,
+        "track_number": 14,
+        "type": "track",
+        "uri": "spotify:track:14VxqWuWyI18GQdLFS5j94",
+        "is_local": false
+      }
+    ]
+  },
+  "copyrights": [
+    {
+      "text": "(C) 2025 ORBIT Entertainment",
+      "type": "C"
+    },
+    {
+      "text": "(P) 2025 ORBIT Entertainment",
+      "type": "P"
+    }
+  ],
+  "external_ids": {
+    "upc": "199538577341"
+  },
+  "genres": [],
+  "label": "ORBIT Entertainment",
+  "popularity": 49
+}

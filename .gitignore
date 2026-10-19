@@ -8,3 +8,5 @@ venv
 .venv
 .idea
 *.egg-info
+.ignore
+!tests/fixtures/**/*.json

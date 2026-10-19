@@ -1,0 +1,29 @@
+{
+  "albums": {
+    "limit": 10,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 1,
+    "items": [
+      {
+        "album_type": "album",
+        "total_tracks": 14,
+        "id": "2Kbn6hMdh6bD50FmLB0eHb",
+        "name": "MIDNIGHT SIGNAL",
+        "release_date": "2025-03-14",
+        "release_date_precision": "day",
+        "type": "album",
+        "uri": "spotify:album:2Kbn6hMdh6bD50FmLB0eHb",
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          }
+        ]
+      }
+    ]
+  }
+}

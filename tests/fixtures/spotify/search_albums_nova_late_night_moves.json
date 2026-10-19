@@ -1,0 +1,35 @@
+{
+  "albums": {
+    "limit": 10,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 1,
+    "items": [
+      {
+        "album_type": "single",
+        "total_tracks": 4,
+        "id": "AiM6aoPb3alX9Sosg4uZZq",
+        "name": "LATE NIGHT MOVES",
+        "release_date": "2026-05-20",
+        "release_date_precision": "day",
+        "type": "album",
+        "uri": "spotify:album:AiM6aoPb3alX9Sosg4uZZq",
+        "artists": [
+          {
+            "id": "hEllVTGDp15NBB8vp6KEhU",
+            "name": "NOVA",
+            "type": "artist",
+            "uri": "spotify:artist:hEllVTGDp15NBB8vp6KEhU"
+          },
+          {
+            "id": "tslzk7HT05npFhrP5lKZtP",
+            "name": "ORBIT",
+            "type": "artist",
+            "uri": "spotify:artist:tslzk7HT05npFhrP5lKZtP"
+          }
+        ]
+      }
+    ]
+  }
+}

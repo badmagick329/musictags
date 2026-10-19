@@ -12,9 +12,13 @@ def test_track_tags_maps_every_field():
     track = Track(
         name="Ice Cream",
         track_number=3,
+        disc_number=1,
+        length=175.813,
         artists=(Artist("BLACKPINK"), Artist("Selena Gomez")),
         album=Album(
+            id="71O60S5gIJSIAhdnrDIh3N",
             name="THE ALBUM",
+            artists=(Artist("BLACKPINK"),),
             album_type="album",
             release_date=date(2020, 10, 2),
             total_tracks=8,
