@@ -119,7 +119,7 @@ def test_choose_album_by_number_after_bad_input(answers, capsys):
     assert ConsoleInteraction().choose_album(ranked(first, second), "A", "B") is second
 
     out = plain(capsys.readouterr().out)
-    assert '1: Artist - One ("2020-08-28") [album] 10 tracks' in out
+    assert "1: Artist - One (2020-08-28) [album] 10 tracks" in out
     assert "Index out of range" in out
     assert "Not a Spotify album link, URI or ID: 'zzz'" in out
 

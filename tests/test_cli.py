@@ -41,12 +41,14 @@ def test_format_track_matches_existing_colour_scheme():
     )
     assert format_track(track) == (
         "\033[33mBLACKPINK\033[0m - \033[34mIce Cream\033[0m - "
-        '\033[32mTHE ALBUM\033[0m (\033[31m"2020-10-02"\033[0m) [album] #3'
+        "\033[32mTHE ALBUM\033[0m (\033[31m2020-10-02\033[0m) [album] #3"
     )
 
 
-def test_format_track_without_release_date():
-    assert '\033[31m"None"\033[0m' in format_track(make_track(release_date=None))
+def test_format_track_leaves_out_unknown_release_date():
+    line = format_track(make_track(album="THE ALBUM", release_date=None))
+    assert "\033[32mTHE ALBUM\033[0m [album]" in line
+    assert "None" not in line
 
 
 @pytest.mark.parametrize(

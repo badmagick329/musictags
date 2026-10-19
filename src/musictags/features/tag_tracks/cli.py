@@ -7,9 +7,14 @@ from musictags.presentation.colors import colorize
 
 
 def format_album(album: Album) -> str:
+    """Shared by both flows' result lines, so per-file and album picks read alike.
+
+    No part of the line is quoted; an unknown release date is left out rather
+    than printed as "None".
+    """
     name = colorize("GREEN", album.name)
-    date = colorize("RED", f'"{album.release_date}"')
-    return f"{name} ({date}) [{album.album_type}]"
+    date = f" ({colorize('RED', str(album.release_date))})" if album.release_date else ""
+    return f"{name}{date} [{album.album_type}]"
 
 
 def format_track(track: Track) -> str:
